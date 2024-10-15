@@ -35,7 +35,12 @@ jobs:
           node-version: '20.x'
           architecture: ppc64le
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: |
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt update
+          sudo apt install yarn
+          yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
       - name: Build React storybook
