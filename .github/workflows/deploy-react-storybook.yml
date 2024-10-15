@@ -26,13 +26,14 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     steps:
       - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # 4.2.1
       - name: Use Node.js 20.x
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
+          architecture: ppc64le
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
@@ -58,7 +59,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     needs: build
     steps:
       - name: Deploy to GitHub Pages
