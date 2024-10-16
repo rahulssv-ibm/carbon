@@ -31,6 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install yarn -g
+          yarn config set supportedArchitectures "linux-ppc64 powerpc64le"
           yarn install --immutable --immutable-cache --check-cache
 
       # For generating playwright json report for avt tests
